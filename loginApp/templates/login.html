@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container row">
+        <div class="col">
+            <H1>Registration</H1>
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %} 
+                    {% if 'register' in message.extra_tags %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>  
+                    {% endif %}  
+                {% endfor %}
+            </ul>
+            {% endif %}            
+            <form action="/register" method="POST">
+            {% csrf_token %}
+            <p>First Name: <input type="text" name="f_name"></p>
+            <p>Last Name: <input type="text" name="l_name"></p>
+            <p>Date of Birth: <input type="date" name="dob"></p>
+            <p>Email: <input type="text" name="email"></p>
+            <p>Password: <input type="text" name="pw"></p>
+            <p>Confirm Password: <input type="text" name="confirm_pw"></p>
+            <button type="submit">Register</button>
+            </form>
+        </div>
+        <div class="col">
+            <H1>Login</H1>
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}
+                    {% if 'login' in message.extra_tags %}    
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/login" method="POST">
+            {% csrf_token %}
+            <p>Email: <input type="text" name="email"></p>
+            <p>Password: <input type="text" name="pw"></p>
+            <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
